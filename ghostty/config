@@ -1,0 +1,51 @@
+theme = catppuccin-mocha
+# font-family = Hack Nerd Font Mono
+# font-family-bold = Hack Nerd Font Mono
+# font-family-italic = Hack Nerd Font Mono
+# font-family-bold-italic = Hack Nerd Font Mono
+font-size = 12
+font-thicken = true
+bold-is-bright = true
+
+# TODO: Does this need to be a login shell too?
+# command = /opt/homebrew/bin/nu --interactive
+
+# If you want to avoid invisible text (same color as background), a value of
+# 1.1 is a good value. If you want to avoid text that is difficult to read, a
+# value of 3 or higher is a good value. The higher the value, the more likely
+# that text will become black or white.
+#minimum-contrast = 1.1
+unfocused-split-opacity = 0.7
+
+# https://github.com/ghostty-org/ghostty/issues/2125
+window-colorspace = display-p3
+
+# mouse-hide-while-typing = true
+# mouse-scroll-multiplier = 1.0
+
+
+# https://github.com/ghostty-org/ghostty/discussions/2363
+# keybind = cmd+right=text:\x05
+# keybind = cmd+left=text:\x01
+# keybind = alt+left=esc:b
+# keybind = alt+right=esc:f
+# keybind = cmd+delete=text:\x0b
+# keybind = cmd+backspace=text:\x15
+# keybind = opt+delete=esc:d
+# TODO: keybind toggle_quick_terminal to something - https://github.com/ghostty-org/ghostty/blob/main/src/config/Config.zig
+# 
+# # Add to .zshrc
+# bindkey "\e[1;3D" backward-word     # ⌥←
+# bindkey "\e[1;3C" forward-word      # ⌥→
+# bindkey "^[[1;9D" beginning-of-line # cmd+←
+# bindkey "^[[1;9C" end-of-line       # cmd+→
+
+# TODO: Decide if this should be a global keybind or not. Aka it'll be usable even when ghostty isn't in the foreground
+# TODO: Adjust the keybind itself to make it usable with mac keyboard
+keybind = all:opt+ctrl+command+shift+t=toggle_quick_terminal
+quick-terminal-animation-duration = 0.05
+
+# Disable secure input as it ends up with super high cpu usage and watchexec
+macos-auto-secure-input = false
+
+macos-option-as-alt = true

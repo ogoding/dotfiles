@@ -1,0 +1,47 @@
+[push]
+	autoSetupRemote = true
+
+[column]
+	ui = auto
+
+[branch]
+    sort = -committerdate
+
+[tag]
+    sort = version:refname
+
+[rebase]
+    updateRefs = true
+    # autoSquash = true
+    # autoStash = true
+
+[fetch]
+	# prune = true
+	# pruneTags = true
+	all = true
+
+[commit]
+	verbose = true
+
+[core]
+	excludesFile = ~/.config/git/.gitignore
+
+[diff]
+    # tool = difftastic
+    external = difft
+
+[difftool]
+    prompt = false
+
+[difftool "difftastic"]
+    cmd = difft "$LOCAL" "$REMOTE"
+
+[alias]
+	# `git dlog` to show `git log -p` with difftastic.
+    dlog = "!f() { GIT_EXTERNAL_DIFF=difft git log -p --ext-diff; }; f"
+
+[pager]
+    difftool = true
+
+[submodule]
+	recurse = true

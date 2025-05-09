@@ -1,0 +1,13 @@
+.DS_Store
+
+helix/grammars
+helix/themes
+
+nushell/history.sqlite3*
+nushell/plugin.msgpackz
+
+raycast/extensions
+
+zed/embeddings
+zed/prompts
+zed/*.tmp*

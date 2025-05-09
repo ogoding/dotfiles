@@ -1,0 +1,23 @@
+# Long or short names work
+--sort size
+
+--disk-usage physical
+
+--human
+
+--dir-order last
+--layout inverted
+
+--hidden
+--no-git
+--icons
+
+# ignore empty folders
+--prune
+
+--follow
+
+--level 3
+
+--truncate
+

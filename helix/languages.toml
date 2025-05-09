@@ -1,0 +1,108 @@
+[[language]]
+name = "rust"
+
+# [language.debugger]
+# name = "lldb"
+# transport = "stdio"
+# command = "lldb"
+
+[language-server.rust-analyzer.config]
+# TODO: pass on some other clippy args
+checkOnSave = { command = "clippy" }
+files.watcher = "server"
+
+# inlayHints.bindingModeHints.enable = false
+# inlayHints.closingBraceHints.minLines = 10
+# inlayHints.closureReturnTypeHints.enable = "with_block"
+# inlayHints.discriminantHints.enable = "fieldless"
+# inlayHints.lifetimeElisionHints.enable = "skip_trivial"
+# inlayHints.typeHints.hideClosureInitialization = false
+
+
+[[language]]
+name = "git-commit"
+rulers = [72]
+
+[[language]]
+name = "xsl"
+scope = "source.xsl"
+injection-regex = "xsl"
+file-types = ["xsl"]
+indent = { tab-width = 2, unit = "  " }
+roots = []
+grammar = "xml"
+
+
+[language-server.biome]
+command = "biome"
+args = ["lsp-proxy"]
+
+[[language]]
+name = "html"
+# formatter = { command = 'prettier', args = ["--parser", "html"] }
+
+[[language]]
+name = "json"
+language-servers = [ { name = "vscode-json-language-server", except-features = [ "format" ] }, "biome" ]
+formatter = { command = "biome", args = ["format", "--stdin-file-path", "a.json"] }
+
+[[language]]
+name = "css"
+# formatter = { command = 'prettier', args = ["--parser", "css"] }
+
+[[language]]
+name = "javascript"
+language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
+formatter = { command = "biome", args = ["format", "--stdin-file-path", "a.js"] }
+auto-format = true
+
+[[language]]
+name = "typescript"
+language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
+formatter = { command = "biome", args = ["format", "--stdin-file-path", "a.ts"] }
+auto-format = true
+
+[[language]]
+name = "tsx"
+language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
+formatter = { command = "biome", args = ["format", "--stdin-file-path", "a.tsx"] }
+auto-format = true
+
+[[language]]
+name = "jsx"
+language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
+formatter = { command = "biome", args = ["format", "--stdin-file-path", "a.jsx"] }
+auto-format = true
+
+[[language]]
+name = "python"
+scope = "source.python"
+language-servers = ["ruff", "ty"]
+auto-format = true
+
+# To be replaced with `ty`
+[language-server.pyright]
+command = "pyright-langserver"
+args = ["--stdio"]
+
+[language-server.ruff]
+command = "uvx"
+args = ["ruff", "server"]
+
+[language-server.ty]
+# `ty` is a typechecker by Astral (the same people as ruff and uv)
+command = "uvx"
+args = ["ty", "server"]
+
+# Java LSP configuration to inject lombok because reasons
+[language-server.jdtls]
+command = "jdtls"
+args = ["--jvm-arg=-javaagent:/Users/ogoding/.local/share/jdtls/lombok.jar"]
+
+[[language]]
+name = "zig"
+auto-format = true
+
+[language-server.zls]
+# config = { enable_build_on_save = true, build_on_save_step = "check" }
+# TODO: Fix inlay-hints for zig and zls

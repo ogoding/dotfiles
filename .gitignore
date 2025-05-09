@@ -1,0 +1,16 @@
+.DS_Store
+
+git/.gitconfig-*
+
+helix/grammars
+helix/themes
+
+nushell/autoload/*
+nushell/history.sqlite3*
+nushell/plugin.msgpackz
+
+raycast/extensions
+
+zed/embeddings
+zed/prompts
+zed/*.tmp*
