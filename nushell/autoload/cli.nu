@@ -12,18 +12,21 @@ alias bup = brew update and brew upgrade
 alias cdconfig = cd ~/.config
 alias hxconfig = hx ~/.config
 
-# TODO: Try to replace watchexec with the inbuilt watch command
-# The only problem with the inbuilt one is that helix writes bcp temporary files and
-# so we need some kind of glob pattern
-def wproc [...args: string] {
-  watchexec --clear reset ...$args
-}
-def wbin [args: closure] {
-  # TODO: Figure out how to make this work. Or whether there's any support for a no-glob arg
-  # let g: glob = "**/*.{rs,ts,js,py,java,bck}"
-  # let glob = $g | into string
-  # watch . -v --glob=$glob {|| try { do $args } }
-  watch . --glob=src/** {|| try { do $args } }
+alias nu-watch = watch
+def watch [
+  args: closure
+] {
+  nu-watch . {|op, path|
+    let bck_file = $path | str ends-with ".bck";
+
+    const IGNORED_PATHS = ["target", "cache", "out", "build"];
+    let ignored = $IGNORED_PATHS | any {|dir| $path | str contains $dir };
+
+    if (($op == "Write") and not $bck_file and not $ignored) {
+      clear
+      try { do $args }
+    }
+  }
 }
 
 def resume [
@@ -31,7 +34,7 @@ def resume [
   proc_name?: string,
   --interactive (-i) = false
 ] {
-  if ($proc_name== null) {
+  if ($proc_name == null) {
     if (job list | is-not-empty) {
       job unfreeze
     } else {
@@ -73,12 +76,13 @@ def hxrg [...args: string] {
   hx ...$files_to_open 
 }
 
-# TODO: Reimplement the following function
-# function find-and-replace() {
-#     OLD=$1
-#     NEW=$2
-#     rg $OLD -l | xargs -I {} sd $OLD $NEW {}
-# }
+def hxfd [...args: string] {
+  let files = fd ...$args | split row "\n";
+  hx ...$files
+}
 
-# TODO: Reimplement any remaining aliases
-# bitwise? tree=>erd? find=>fd?
+def find-and-replace [old: string, new: string] {
+  rg $old -l
+    | split row "\n"
+    | each {|file| sd $old $new $file}
+}

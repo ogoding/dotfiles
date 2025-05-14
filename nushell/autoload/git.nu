@@ -1,5 +1,6 @@
 # TODO: Move all this into a module and autoload it if `.git` exists?
 
+alias gitui = lazygit
 alias gui = lazygit
 
 alias gadd = git add
@@ -20,10 +21,17 @@ alias gpl = git pull
 alias glog = git dlog
 alias gloggraph = git log --graph --oneline
 
-# FIXME: Work out how to alias 2 commands
+# TODO: Convert these to multi-command aliases when it's supported
 # https://github.com/nushell/nushell/issues/740#issuecomment-1950144291
-# alias gac = gaddmod; gc
-# alias gacm = gaddmod; gcm
+def gac [] {
+  gaddmod;
+  gc
+}
+
+def gacm [message: string] {
+  gaddmod;
+  gcm $message
+}
 
 alias gdiff = git diff
 alias gdiffstg = git diff --staged
@@ -31,6 +39,7 @@ alias gdif = gdiff
 alias gdifs = gdiffstg
 alias gdiffs = gdiffstg
 
+# TODO: Convert this to a function and use fzf/skim
 alias gsw = git switch # TODO: Also fetch/pull?
 alias gswnew = git switch -c
 alias gundo = git restore

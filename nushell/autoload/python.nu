@@ -1,5 +1,5 @@
 module py {
-  export def run [script: string = "main.py"] {
+  export def pyrun [script: string = "main.py"] {
     if ($script| path exists) {
       uv run $script
     } else {
@@ -10,9 +10,19 @@ module py {
   # TODO: Run, or at least prompt an uv-update if it hasn't happened in a while
   # TODO: Run uv tool install if tool is missing - uvx run <tool> doesn't seem to do the same as as uv tool install
   # NOTE: Additionally, we might want to swap between uv and uvx depending on whether the tool is already part of the pyproject.toml file or venv
-  export alias lint = uvx ruff check
-  export alias format = uvx ruff check
-  export alias type-check = uvx ty check
+  export def lint [] {
+    uvx ruff check
+  }
+  export def format [] {
+    uvx ruff check
+  }
+  export def type-check [] {
+    uvx ty check
+  }
+  export def check [] {
+    lint
+    type-check
+  }
 
   # TODO: Create something to track the last update and auto update
   # Add a config/envvar to disable the autoupdate

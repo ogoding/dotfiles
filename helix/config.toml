@@ -99,7 +99,11 @@ s = ":pipe sort"
 j = "save_selection"
 d = ":yank-diagnostic"
 
-H = ":toggle lsp.display-inlay-hints"
+# Yank the current selection into the search register
+# This is quicker than copying the selection to the system clipboard, then searching, then pasting
+y = "@\"/y"
+
+h = ":toggle lsp.display-inlay-hints"
 
 # r = ":run-shell-command cargo run"
 # b = ":run-shell-command cargo build"
