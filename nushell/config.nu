@@ -9,10 +9,6 @@ $env.config = $env.config | default {} | merge {
   bracketed_paste: true,
   # edit_mode: "vi",
 
-  display_errors: {
-    exit_code: true
-  },
-  
   # TODO: Completions config
   history: {
     file_format: "sqlite",
