@@ -90,7 +90,7 @@ command = "uvx"
 args = ["ruff", "server"]
 
 [language-server.ruff.config]
-lint.select = ["F", "RUF", "FURB", "E", "W", "PERF", "I"]
+lint.select = ["E", "W", "F", "I", "RUF", "FURB", "PERF"]
 lint.fixable = ["ALL"]
 
 [language-server.ty]
