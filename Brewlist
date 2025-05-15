@@ -22,8 +22,6 @@ watchexec
 zoxide
 
 # LSPs
-rust-analyzer
-
 terraform-ls
 tfenv
 tflint

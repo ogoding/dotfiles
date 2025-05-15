@@ -89,6 +89,10 @@ args = ["--stdio"]
 command = "uvx"
 args = ["ruff", "server"]
 
+[language-server.ruff.config]
+lint.select = ["F", "RUF", "FURB", "E", "W", "PERF", "I"]
+lint.fixable = ["ALL"]
+
 [language-server.ty]
 # `ty` is a typechecker by Astral (the same people as ruff and uv)
 command = "uvx"
