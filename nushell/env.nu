@@ -14,6 +14,6 @@ load-env {
 };
 
 use std/util "path add"
-path add "/opt/homebrew/bin"
 path add "~/.cargo/bin"
 path add "~/.local/bin"
+path add "/opt/homebrew/bin"

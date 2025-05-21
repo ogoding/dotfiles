@@ -16,6 +16,7 @@ alias nu-watch = watch
 def watch [
   args: closure
 ] {
+  clear
   nu-watch . {|op, path|
     let bck_file = $path | str ends-with ".bck";
 
