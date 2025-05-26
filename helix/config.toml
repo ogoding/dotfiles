@@ -84,7 +84,6 @@ j = "jump_forward"
 q = ":buffer-close"
 Q = ":buffer-close-others"
 
-# w = "goto_word"
 e = "goto_last_modification"
 E = "goto_last_accessed_file"
 
@@ -96,19 +95,17 @@ u = ":pipe uniq"
 s = ":pipe sort"
 
 # Save selection to the jumplist
-j = "save_selection"
+S = "save_selection"
 d = ":yank-diagnostic"
 
 # Yank the current selection into the search register
 # This is quicker than copying the selection to the system clipboard, then searching, then pasting
 y = "@\"/y"
+j = "yank_joined"
 
 h = ":toggle lsp.display-inlay-hints"
 
-# r = ":run-shell-command cargo run"
-# b = ":run-shell-command cargo build"
-# t = ":run-shell-command cargo test" 
-# b = ":sh git -C $(dirname $(realpath %{buffer_name})) blame -L %{cursor_line},%{cursor_line} $(realpath %{buffer_name})"
+b = ":sh git -C $(dirname $(realpath %{buffer_name})) blame -L %{cursor_line},%{cursor_line} $(realpath %{buffer_name})"
 
 [keys.insert]
 tab = "indent"

@@ -1,5 +1,5 @@
 alias tree = erd
-alias cat = bat --colour=always
+alias cat = bat --color=always
 alias btop = btm
 
 alias l = ls
@@ -11,6 +11,7 @@ alias bup = brew update and brew upgrade
 
 alias cdconfig = cd ~/.config
 alias hxconfig = hx ~/.config
+alias hx-clear-log = rm ~/.cache/helix/helix.log
 
 alias nu-watch = watch
 def watch [

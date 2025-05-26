@@ -23,10 +23,7 @@ if (not (plugin list | any {|p| $p.name == "polars" })) {
   # TODO: Disable the plugin_gc for polars?
 }
 
-# Configure Shell Prompt
-source starship.nu
-# Zoxide is a smarter 'cd' command that updates rankings with every directory change
-source zoxide.nu
+# TODO: Setup a zoxide keybinding?
 
 # Command Completion configuration
 $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional

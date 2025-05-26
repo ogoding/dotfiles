@@ -43,4 +43,19 @@ $current.completions.external = ($current.completions.external
   | default $external_completer completer)
 
 $env.config = $current
- 
+
+# TODO: Work out how to load this more automatically
+const completionsDir = "completions"
+source $"($completionsDir)/aws-completions.nu"
+source $"($completionsDir)/docker-completions.nu"
+source $"($completionsDir)/git-completions.nu"
+source $"($completionsDir)/just-completions.nu"
+source $"($completionsDir)/make-completions.nu"
+source $"($completionsDir)/npm-completions.nu"
+source $"($completionsDir)/pnpm-completions.nu"
+source $"($completionsDir)/pre-commit-completions.nu"
+source $"($completionsDir)/ripgrep-completions.nu"
+source $"($completionsDir)/rustup-completions.nu"
+source $"($completionsDir)/yarnv4-completions.nu"
+source $"($completionsDir)/zellij-completions.nu"
+

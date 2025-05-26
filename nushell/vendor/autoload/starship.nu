@@ -10,6 +10,7 @@ export-env { $env.STARSHIP_SHELL = "nu"; load-env {
 
     # Does not play well with default character module.
     # TODO: Also Use starship vi mode indicators?
+    # TODO: Try and show the number of nushell jobs somehow?
     PROMPT_INDICATOR: ""
 
     PROMPT_COMMAND: {||
