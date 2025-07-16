@@ -8,7 +8,7 @@ name = "rust"
 
 [language-server.rust-analyzer.config]
 # TODO: pass on some other clippy args
-checkOnSave = { command = "clippy" }
+check = { command = "clippy" }
 files.watcher = "server"
 
 # inlayHints.bindingModeHints.enable = false
@@ -77,7 +77,7 @@ auto-format = true
 [[language]]
 name = "python"
 scope = "source.python"
-language-servers = ["ruff", "ty"]
+language-servers = ["ty", "ruff"]
 auto-format = true
 
 # To be replaced with `ty`
@@ -89,9 +89,43 @@ args = ["--stdio"]
 command = "uvx"
 args = ["ruff", "server"]
 
-[language-server.ruff.config]
-lint.select = ["E", "W", "F", "I", "RUF", "FURB", "PERF"]
-lint.fixable = ["ALL"]
+[language-server.ruff.config.lint]
+select = [
+  "E",
+  "W",
+  "F",
+  "I",
+  "RUF",
+  "FURB",
+  "PERF"
+  # "E",     # pycodestyle errors
+  # "W",     # pycodestyle warnings
+  # "F",     # pyflakes
+  # "B",     # flake8-bugbear
+  # "I",     # isort
+  # "RUF",   # ruff
+  # "D",     # docstrings
+  # "UP",    # pyupgrade
+  # "ANN",   # annotations
+  # "ASYNC", # async checks
+  # "S",     # bandit (security)
+  # "YTT",   # datetime checks
+  # "A",     # builtins shadowing
+  # "RET",   # return statements
+  # "TCH",   # type-checking
+  # "ARG",   # function args
+  # "PTH",   # pathlib over os.path
+  # "ERA",   # env assumptions
+  # "LOG",   # logging practices
+  # "N",     # naming
+  # "C4",    # comprehensions
+  # "T10",   # debugger usage
+  # "SIM",   # simplify code
+  # "TRY",   # try/except
+  # "C90",   # complexity
+  # "PGH",   # pattern hooks
+]
+fixable = ["ALL"]
 
 [language-server.ty]
 # `ty` is a typechecker by Astral (the same people as ruff and uv)

@@ -7,7 +7,10 @@ alias ll = ls -l
 alias la = ls -la
 
 alias brewup = brew update
-alias bup = brew update and brew upgrade
+def bup [] {
+  brew update;
+  brew upgrade
+}
 
 alias cdconfig = cd ~/.config
 alias hxconfig = hx ~/.config
@@ -21,7 +24,7 @@ def watch [
   nu-watch . {|op, path|
     let bck_file = $path | str ends-with ".bck";
 
-    const IGNORED_PATHS = ["target", "cache", "out", "build"];
+    const IGNORED_PATHS = ["target", "cache", "out", "build", ".git", ".jj"];
     let ignored = $IGNORED_PATHS | any {|dir| $path | str contains $dir };
 
     if (($op == "Write") and not $bck_file and not $ignored) {
@@ -87,4 +90,8 @@ def find-and-replace [old: string, new: string] {
   rg $old -l
     | split row "\n"
     | each {|file| sd $old $new $file}
+}
+
+def top-commands [] {
+  history | each {|h| $h.command | split words | first 1 } | flatten | histogram | first 10
 }
