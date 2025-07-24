@@ -7,8 +7,7 @@ font-size = 12
 font-thicken = true
 bold-is-bright = true
 
-# TODO: Does this need to be a login shell too?
-# command = /opt/homebrew/bin/nu --interactive
+command = /opt/homebrew/bin/nu --interactive
 
 # If you want to avoid invisible text (same color as background), a value of
 # 1.1 is a good value. If you want to avoid text that is difficult to read, a
