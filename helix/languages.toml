@@ -80,14 +80,9 @@ scope = "source.python"
 language-servers = ["ty", "ruff"]
 auto-format = true
 
-# To be replaced with `ty`
-[language-server.pyright]
-command = "pyright-langserver"
-args = ["--stdio"]
-
 [language-server.ruff]
-command = "uvx"
-args = ["ruff", "server"]
+command = "uv"
+args = ["tool", "run", "ruff", "server"]
 
 [language-server.ruff.config.lint]
 select = [
@@ -129,8 +124,8 @@ fixable = ["ALL"]
 
 [language-server.ty]
 # `ty` is a typechecker by Astral (the same people as ruff and uv)
-command = "uvx"
-args = ["ty", "server"]
+command = "uv"
+args = ["tool", "run", "ty", "server"]
 
 # Java LSP configuration to inject lombok because reasons
 [language-server.jdtls]

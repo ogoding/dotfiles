@@ -49,3 +49,8 @@ quick-terminal-animation-duration = 0.05
 macos-auto-secure-input = false
 
 macos-option-as-alt = true
+
+window-save-state = always
+window-padding-balance = true
+mouse-hide-while-typing = true
+mouse-scroll-multiplier = 0.8

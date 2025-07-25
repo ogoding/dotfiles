@@ -6,3 +6,6 @@ set -ex
 # TODO: Create setup nushell module/function to set the rest of the environment up
 # - git config
 # - nushell symlink
+#  ln -s ~/.config/nushell nushell
+# - create carapace cache
+# mkdir -p ~/.cache/carapace

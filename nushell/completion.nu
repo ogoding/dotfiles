@@ -12,6 +12,8 @@ let carapace_completer = {|spans: list<string>|
     | if ($in | default [] | where value =~ '^-.*ERR$' | is-empty) { $in } else { null }
 }
 
+# TODO: Try setting carapace to unfiltered and using fuzzy search on the nushell side
+# CARAPACE_UNFILTERED=1
 let external_completer = {|spans|
   # if the current command is an alias, get it's expansion
   let expanded_alias = (scope aliases | where name == $spans.0 | get -i 0 | get -i expansion)
@@ -36,11 +38,11 @@ let external_completer = {|spans|
 mut current = (($env | default {} config).config | default {} completions)
 $current.completions = ($current.completions
   | default {} external)
-# $current.completions.algorithm = 'fuzzy'
+$current.completions.algorithm = 'fuzzy'
 
 $current.completions.external = ($current.completions.external
   | default true enable
-  | default $external_completer completer)
+  | default { $external_completer } completer)
 
 $env.config = $current
 
@@ -58,4 +60,3 @@ source $"($completionsDir)/ripgrep-completions.nu"
 source $"($completionsDir)/rustup-completions.nu"
 source $"($completionsDir)/yarnv4-completions.nu"
 source $"($completionsDir)/zellij-completions.nu"
-

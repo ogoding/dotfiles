@@ -24,10 +24,9 @@
 	verbose = true
 
 [core]
-	excludesFile = ~/.config/git/.gitignore
+	excludesFile = ./.gitignore
 
 [diff]
-    # tool = difftastic
     external = difft
 
 [difftool]

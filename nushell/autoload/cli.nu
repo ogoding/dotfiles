@@ -16,6 +16,10 @@ alias cdconfig = cd ~/.config
 alias hxconfig = hx ~/.config
 alias hx-clear-log = rm ~/.cache/helix/helix.log
 
+use std/dirs;
+alias pushd = dirs add
+alias popd = dirs drop
+
 alias nu-watch = watch
 def watch [
   args: closure
@@ -49,8 +53,8 @@ def resume [
     # With no args, just do "jobs unfreeze"
     # With args, pass to fzf/skim and fuzzy search for the process name
      
-    let jobs = job list | filter {|j| $j.type == "frozen" }
-      | filter {|j|
+    let jobs = job list | where {|j| $j.type == "frozen" }
+      | where {|j|
         ps
         | where pid in $j.pids
         # TODO: Add some fuzzy searching
@@ -94,4 +98,23 @@ def find-and-replace [old: string, new: string] {
 
 def top-commands [] {
   history | each {|h| $h.command | split words | first 1 } | flatten | histogram | first 10
+}
+
+# TODO: Write something that changes the current dir to either $HOME or the closest .git (whichever is first)
+# - make the function to determine the closest .git, .jj or $HOME into a standalone function so that we can use it with zi or fzf to quickly jump around a repo
+#   - if we use zi for jumping out, we could just auto insert the project/home dir path into the query prompt
+# def cdroot [] {
+  
+# }
+
+def backup [
+  path: string,
+  --include-date(-d) = false
+] {
+  ## TODO: add a flag to include the date
+  cp $path $"($path).bak"
+}
+
+def bench [script_file] {
+  open $script_file | split row "\n" | hyperfine ...$in
 }
