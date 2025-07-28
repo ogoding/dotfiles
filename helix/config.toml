@@ -99,7 +99,7 @@ U = ":pipe uniq"
 S = ":sort"
 
 # Save selection to the jumplist
-S = "save_selection"
+j = "save_selection"
 d = ":yank-diagnostic"
 y = "yank_joined"
 Y = "yank_joined_to_clipboard"
