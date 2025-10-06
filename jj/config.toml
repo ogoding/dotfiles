@@ -1,0 +1,18 @@
+[ui]
+editor = "/opt/homebrew/bin/hx"
+default-command = "show"
+diff-formatter = ["difft", "--color=always", "$left", "$right"]
+
+
+[git]
+auto-local-bookmark = true
+write-change-id-header = true
+push-new-bookmarks = true
+
+
+[aliases]
+tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
+
+[revset-aliases]
+'closest_bookmark(to)' = 'heads(::to & bookmarks())'
+

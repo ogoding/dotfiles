@@ -16,7 +16,7 @@ let carapace_completer = {|spans: list<string>|
 # CARAPACE_UNFILTERED=1
 let external_completer = {|spans|
   # if the current command is an alias, get it's expansion
-  let expanded_alias = (scope aliases | where name == $spans.0 | get -i 0 | get -i expansion)
+  let expanded_alias = (scope aliases | where name == $spans.0 | get --optional 0 | get --optional expansion)
 
   # overwrite
   let spans = (if $expanded_alias != null  {
@@ -59,4 +59,4 @@ source $"($completionsDir)/pre-commit-completions.nu"
 source $"($completionsDir)/ripgrep-completions.nu"
 source $"($completionsDir)/rustup-completions.nu"
 source $"($completionsDir)/yarnv4-completions.nu"
-source $"($completionsDir)/zellij-completions.nu"
+source $"($completionsDir)/jj-completions.nu"
