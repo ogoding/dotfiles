@@ -6,28 +6,32 @@ alias jsh = jj show
 alias jst = jj status
 alias js = jst
 alias jjl = jj log
-alias jl = jl
+alias jl = jjl
 alias jc = jj commit
-alias jn = jj new
+# alias jn = jj new
 
-alias jgf = jj git fetch
-alias jf = jgf
+alias jjf = jj git fetch
+alias jf = jjf
+
+def jj_rebase_to_latest [] {
+  jj git fetch;
+  jj rebase -A "trunk()"
+}
 
 def jjp [] {
   jj tug;
   jj git push;
 }
+alias jp = jjp
 
-def jjnew [new_bookmark: string, base_bookmark?: string] {
-  let bookmarks = jj bookmark list --all --template "concat(self.name(), '\n')"
-    | split row "\n"
-    | where {|line| $line in ['main', 'develop', 'trunk', 'master']};
-  let bookmark = $base_bookmark | default ($bookmarks | first);
-
-  jj new $bookmark;
-  jj bookmark create $new_bookmark -r @-;
+def jjnew [new_bookmark?: string] {
+  jj new "trunk()";
+  if ($new_bookmark) {
+    jj bookmark create $new_bookmark -r @;
+  }
 }
 alias jnew = jjnew
+alias jn = jjnew
 
 # https://danverbraganza.com/writings/most-frequent-jj-commands
 # https://jj-vcs.github.io/jj/latest/github/#using-a-named-bookmark

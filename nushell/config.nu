@@ -15,6 +15,10 @@ $env.config = $env.config | default {} | merge {
     sync_on_enter: true,
     isolation: true
   },
+
+  display_errors: {
+    exit_code: true
+  }
 };
 
 if (not (plugin list | any {|p| $p.name == "polars" })) {

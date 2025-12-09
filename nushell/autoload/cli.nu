@@ -19,6 +19,10 @@ alias hx-clear-log = rm ~/.cache/helix/helix.log
 use std/dirs;
 alias pushd = dirs add
 alias popd = dirs drop
+alias dn = dirs next
+alias dp = dirs prev
+alias dl = dirs
+alias dgo = dirs goto
 
 alias nu-watch = watch
 def watch [
@@ -43,6 +47,7 @@ def resume [
   proc_name?: string,
   --interactive (-i) = false
 ] {
+  # TODO: If proc_name is number-like, treat it as a job id
   if ($proc_name == null) {
     if (job list | is-not-empty) {
       job unfreeze
@@ -52,7 +57,7 @@ def resume [
   } else {
     # With no args, just do "jobs unfreeze"
     # With args, pass to fzf/skim and fuzzy search for the process name
-     
+
     let jobs = job list | where {|j| $j.type == "frozen" }
       | where {|j|
         ps
@@ -63,7 +68,7 @@ def resume [
       };
 
     if ($jobs | is-not-empty) {
-      $jobs | first | job unfreeze
+      $jobs | last | job unfreeze
     } else {
       print $"No jobs found for ($proc_name)"
     }
@@ -82,7 +87,7 @@ def hxrg [...args: string] {
     | flatten
     | each {|f| $f.file ++ ":" ++ $f.line};
 
-  hx ...$files_to_open 
+  hx ...$files_to_open
 }
 
 def hxfd [...args: string] {
@@ -104,7 +109,7 @@ def top-commands [] {
 # - make the function to determine the closest .git, .jj or $HOME into a standalone function so that we can use it with zi or fzf to quickly jump around a repo
 #   - if we use zi for jumping out, we could just auto insert the project/home dir path into the query prompt
 # def cdroot [] {
-  
+
 # }
 
 def backup [

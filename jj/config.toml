@@ -1,18 +1,28 @@
+#:schema https://jj-vcs.github.io/jj/latest/config-schema.json
+
 [ui]
 editor = "/opt/homebrew/bin/hx"
-default-command = "show"
+default-command = "status"
 diff-formatter = ["difft", "--color=always", "$left", "$right"]
 
 
 [git]
-auto-local-bookmark = true
 write-change-id-header = true
-push-new-bookmarks = true
+
+[remotes.origin]
+auto-track-bookmarks = "glob:*"
 
 
 [aliases]
-tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
+tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks() & mine())", "--to", "@-"]
+tug-all = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
+
+# Print my bookmarks. Courtesy of https://danverbraganza.com/writings/most-frequent-jj-commands
+mine = ["bookmark", "list", "-r", "mine()"]
+conflicts = ["bookmark", "list", "-r", "conflicts()"]
+
+# Should this be in the jj config or nushell?
+lg = ["log", "-r", "ancestors(reachable(@, mutable()), 2)"]
 
 [revset-aliases]
 'closest_bookmark(to)' = 'heads(::to & bookmarks())'
-

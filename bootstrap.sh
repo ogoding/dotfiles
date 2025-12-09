@@ -9,3 +9,5 @@ set -ex
 #  ln -s ~/.config/nushell nushell
 # - create carapace cache
 # mkdir -p ~/.cache/carapace
+
+# TODO: Implement some mechanism to create backups of existing files, then overwrite them (either with a symlink or this repo)

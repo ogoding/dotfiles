@@ -32,7 +32,7 @@ window-colorspace = display-p3
 # keybind = cmd+backspace=text:\x15
 # keybind = opt+delete=esc:d
 # TODO: keybind toggle_quick_terminal to something - https://github.com/ghostty-org/ghostty/blob/main/src/config/Config.zig
-# 
+#
 # # Add to .zshrc
 # bindkey "\e[1;3D" backward-word     # ⌥←
 # bindkey "\e[1;3C" forward-word      # ⌥→
@@ -43,6 +43,8 @@ window-colorspace = display-p3
 # TODO: Adjust the keybind itself to make it usable with mac keyboard
 keybind = all:opt+ctrl+command+shift+t=toggle_quick_terminal
 quick-terminal-animation-duration = 0.05
+quick-terminal-size = 40%
+quick-terminal-position = center
 
 # Disable secure input as it ends up with super high cpu usage and watchexec
 macos-auto-secure-input = false

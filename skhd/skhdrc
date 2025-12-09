@@ -1,16 +1,16 @@
-# .blacklist [
-#     "google chrome"
-# ]
+.blacklist [
+    "1Password"
+]
 
 meh - c : open -a "Google Chrome"
 meh - f : open -a "Firefox"
-meh - a : open -a "Spotify"
-meh - d : open -a "Todoist"
+meh - m : open -a "Spotify"
+meh - l : open -a "Todoist"
 meh - k : open -a "Keymapp"
 
 meh - h : open -a "Httpie"
 meh - t : open -a "Ghostty"
 meh - o : open -a "Obsidian"
 meh - s : open -a "Sublime Text"
-meh - m : open -a "Sublime Merge"
+meh - g : open -a "Sublime Merge"
 meh - z : open -a "Zed"
