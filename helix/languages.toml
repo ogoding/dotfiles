@@ -1,25 +1,4 @@
 [[language]]
-name = "rust"
-
-# [language.debugger]
-# name = "lldb"
-# transport = "stdio"
-# command = "lldb"
-
-[language-server.rust-analyzer.config]
-# TODO: pass on some other clippy args
-check = { command = "clippy" }
-files.watcher = "server"
-
-# inlayHints.bindingModeHints.enable = false
-# inlayHints.closingBraceHints.minLines = 10
-# inlayHints.closureReturnTypeHints.enable = "with_block"
-# inlayHints.discriminantHints.enable = "fieldless"
-# inlayHints.lifetimeElisionHints.enable = "skip_trivial"
-# inlayHints.typeHints.hideClosureInitialization = false
-
-
-[[language]]
 name = "git-commit"
 rulers = [72]
 
@@ -33,46 +12,49 @@ roots = []
 grammar = "xml"
 
 
-[language-server.biome]
-command = "biome"
-args = ["lsp-proxy"]
-
 [[language]]
 name = "html"
-# formatter = { command = 'prettier', args = ["--parser", "html"] }
 
+# See the following link for how to install the json/css/etc LSPs
+# https://github.com/helix-editor/helix/wiki/Language-Server-Configurations#json
 [[language]]
 name = "json"
-language-servers = [ { name = "vscode-json-language-server", except-features = [ "format" ] }, "biome" ]
-formatter = { command = "biome", args = ["format", "--stdin-file-path", "a.json"] }
+formatter = { command = "prettier", args = [ "--parser", "json" ] }
 
 [[language]]
 name = "css"
-# formatter = { command = 'prettier', args = ["--parser", "css"] }
+formatter = { command = "prettier", args = [ "--parser", "css" ] }
 
 [[language]]
 name = "javascript"
-language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
-formatter = { command = "biome", args = ["format", "--stdin-file-path", "a.js"] }
 auto-format = true
+formatter = { command = "prettier", args = [ "--parser", "typescript" ] }
+language-servers = ["tsgo", "typescript-language-server"]
 
 [[language]]
 name = "typescript"
-language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
-formatter = { command = "biome", args = ["format", "--stdin-file-path", "a.ts"] }
 auto-format = true
+formatter = { command = "prettier", args = [ "--parser", "typescript" ] }
+language-servers = ["tsgo", "typescript-language-server"]
 
 [[language]]
 name = "tsx"
-language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
-formatter = { command = "biome", args = ["format", "--stdin-file-path", "a.tsx"] }
 auto-format = true
+formatter = { command = "prettier", args = [ "--parser", "typescript" ] }
+language-servers = ["tsgo", "typescript-language-server"]
 
 [[language]]
 name = "jsx"
-language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
-formatter = { command = "biome", args = ["format", "--stdin-file-path", "a.jsx"] }
 auto-format = true
+formatter = { command = "prettier", args = [ "--parser", "typescript" ] }
+language-servers = ["tsgo", "typescript-language-server"]
+
+[language-server.tsgo]
+name = "tsgo"
+command = "tsgo"
+args = ["--lsp", "--stdio"]
+config.hostInfo = "helix"
+
 
 [[language]]
 name = "python"

@@ -9,6 +9,7 @@ load-env {
   HOMEBREW_CELLAR:"/opt/homebrew/Cellar",
   HOMEBREW_REPOSITORY:"/opt/homebrew",
   INFOPATH: "/opt/homebrew/share/info:",
+  # XDG_CONFIG_HOME: "~/.config",
 
   GPG_TTY:(tty)
 };

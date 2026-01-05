@@ -112,6 +112,9 @@ def top-commands [] {
 
 # }
 
+# TODO: Write something that uses a backing file (e.g. in ~/.cache or ~/.local) to store common directories
+# Potentially has a bit of overlap with zoxide and maybe it'd be better implemented by figuring out the zoxide completions but the pattern of a backing plaintext file +
+
 def backup [
   path: string,
   --include-date(-d) = false

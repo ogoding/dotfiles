@@ -6,8 +6,11 @@ helix/runtime
 helix/grammars
 helix/themes
 
+jj/repos
+
 nushell/history.sqlite3*
 nushell/plugin.msgpackz
+nushell/autoload/ignored.nu
 
 raycast/extensions
 

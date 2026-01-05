@@ -1,5 +1,8 @@
 #:schema https://jj-vcs.github.io/jj/latest/config-schema.json
 
+[user]
+name = "Oliver Goding"
+
 [ui]
 editor = "/opt/homebrew/bin/hx"
 default-command = "status"
@@ -21,8 +24,27 @@ tug-all = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@
 mine = ["bookmark", "list", "-r", "mine()"]
 conflicts = ["bookmark", "list", "-r", "conflicts()"]
 
+current = ["bookmark", "list", "--from", "heads(::@- & bookmarks() & mine())"]
+
 # Should this be in the jj config or nushell?
 lg = ["log", "-r", "ancestors(reachable(@, mutable()), 2)"]
 
 [revset-aliases]
 'closest_bookmark(to)' = 'heads(::to & bookmarks())'
+
+[templates]
+draft_commit_description = '''
+concat(
+  description,
+  "\n",
+  indent("JJ: ", 
+    concat(
+      "---------------------------------------------------------\n",
+      "Summary of changes:\n",
+      diff.stat(),
+      "---------------------------------------------------------\n",
+      diff.git()
+    )
+  )
+)
+'''

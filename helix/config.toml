@@ -16,8 +16,7 @@ trim-trailing-whitespace = false
 
 auto-save.focus-lost = true
 auto-save.after-delay.enable = true
-# range: [0; u64::MAX] default: 3000
-auto-save.after-delay.timeout = 200
+auto-save.after-delay.timeout = 600
 
 end-of-line-diagnostics = "hint"
 
@@ -63,8 +62,13 @@ other-lines = "error"
 C-j = "save_selection"
 C-z = [":write-all", "suspend"]
 
+# These are normally the other way around, however this better matches how the [] binds work
+C-i = "jump_backward"
+C-o = "jump_forward"
+
 esc = ["collapse_selection", "keep_primary_selection"]
 
+# TODO: Create set of hotkeys for buffer actions
 
 # C-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
 # C-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
@@ -76,16 +80,34 @@ esc = ["collapse_selection", "keep_primary_selection"]
 
 [keys.normal."["]
 "[" = "goto_previous_buffer"
+"space" = "goto_last_accessed_file"
 j = "jump_backward"
 
 [keys.normal."]"]
 "]" = "goto_next_buffer"
+"space" = "goto_last_modified_file"
 j = "jump_forward"
+
+# buffer close - quick key
+# [keys.normal."\\"]
+# "\\" = ":buffer-close"
+# delete from current line to end of file
+# C-x = "@VGd"
+# Select the current word
+# W = "@miw"
+# Move to inside the previous parenthesis
+# H = "@F)mi("
+# Move to inside the next parenthesis
+# L = "@f(mi("
+# For jumping between markdown headers
+# "A-j" = '@/^#+\s+.*$<ret>'
+# "A-k" = '@?^#+\s+.*$<ret>'
 
 # TODO: Create a goto next/previous merge conflict (go to next sequence of <<<<<<<<|=======|>>>>>>>>)
 # - use the new `copy_between_registers` command (or just do the copying manually) and temporarily stash whatever is in the `/` register before searching, swap back after searching
 # - because macros can't be used in a keybind sequence (see below keybinds on symbol_picker) a temporary solution would be to have a secondary macro to swap between a 'stash' register manually
-# m = ""
+# v = "@/<<<<<<<<|=======|>>>>>>>><ret>"
+# v = "@/=======<ret>"
 
 [keys.normal.backspace]
 q = ":buffer-close"
@@ -106,14 +128,13 @@ Y = "yank_joined_to_clipboard"
 
 # Yank the current selection into the search register
 s = "@\"/y"
-# c = "copy_between_registers"
 
 # See the following github issue for tracking macros in a keybind sequence
 # https://github.com/helix-editor/helix/issues/12420
 # c = ["symbol_picker", "@%k class "]
 # v = ["symbol_picker", "@%k function "]
 
-h = ":toggle lsp.display-inlay-hints"
+H = ":toggle lsp.display-inlay-hints"
 # TODO: Add a keybind to disable highlighting. It can be very distracting when resolving merge conflicts
 
 b = ":echo %sh{git blame -L %{cursor_line},+1 %{buffer_name}}"
