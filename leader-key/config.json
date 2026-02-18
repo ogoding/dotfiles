@@ -1,0 +1,156 @@
+{
+  "actions" : [
+    {
+      "key" : "t",
+      "type" : "application",
+      "value" : "/Applications/Ghostty.app"
+    },
+    {
+      "actions" : [
+        {
+          "key" : "c",
+          "type" : "application",
+          "value" : "/Applications/Google Chrome.app"
+        },
+        {
+          "key" : "m",
+          "type" : "application",
+          "value" : "/Applications/Spotify.app"
+        },
+        {
+          "key" : "s",
+          "type" : "application",
+          "value" : "/Applications/Slack.app"
+        },
+        {
+          "key" : "f",
+          "type" : "application",
+          "value" : "/Applications/Firefox.app"
+        },
+        {
+          "key" : "t",
+          "type" : "application",
+          "value" : "/Applications/Todoist.app"
+        },
+        {
+          "key" : "o",
+          "type" : "application",
+          "value" : "/Applications/Obsidian.app"
+        },
+        {
+          "key" : "a",
+          "type" : "application",
+          "value" : "/System/Applications/Utilities/Activity Monitor.app"
+        },
+        {
+          "key" : "d",
+          "type" : "application",
+          "value" : "/Users/ogoding/Applications/Chrome Apps.localized/Google Chat.app"
+        }
+      ],
+      "key" : "a",
+      "label" : "Open App",
+      "type" : "group"
+    },
+    {
+      "actions" : [
+        {
+          "key" : "1",
+          "label" : "Maximize",
+          "type" : "url",
+          "value" : "rectangle://execute-action?name=maximize"
+        },
+        {
+          "actions" : [
+            {
+              "key" : "1",
+              "label" : "Left half",
+              "type" : "url",
+              "value" : "rectangle://execute-action?name=left-half"
+            },
+            {
+              "key" : "2",
+              "label" : "Right half",
+              "type" : "url",
+              "value" : "rectangle://execute-action?name=right-half"
+            }
+          ],
+          "key" : "2",
+          "label" : "Resize: Two columns",
+          "type" : "group"
+        },
+        {
+          "actions" : [
+            {
+              "key" : "1",
+              "label" : "First third",
+              "type" : "url",
+              "value" : "rectangle://execute-action?name=first-third"
+            },
+            {
+              "key" : "2",
+              "label" : "Center third",
+              "type" : "url",
+              "value" : "rectangle://execute-action?name=center-third"
+            },
+            {
+              "key" : "3",
+              "label" : "Last third",
+              "type" : "url",
+              "value" : "rectangle://execute-action?name=last-third"
+            },
+            {
+              "key" : "9",
+              "label" : "First two-thirds",
+              "type" : "url",
+              "value" : "rectangle://execute-action?name=first-two-thirds"
+            },
+            {
+              "key" : "0",
+              "label" : "Last two-thirds",
+              "type" : "url",
+              "value" : "rectangle://execute-action?name=last-two-thirds"
+            }
+          ],
+          "key" : "3",
+          "label" : "Resize: Three columns",
+          "type" : "group"
+        },
+        {
+          "key" : "w",
+          "label" : "Close",
+          "type" : "url",
+          "value" : "rectangle://execute-action?name=close"
+        },
+        {
+          "key" : "q",
+          "label" : "Quit App",
+          "type" : "url",
+          "value" : "rectangle://execute-action?name=quit-app"
+        },
+        {
+          "key" : "f",
+          "label" : "Fullscreen",
+          "type" : "url",
+          "value" : "rectangle://execute-action?name=fullscreen"
+        },
+        {
+          "key" : "m",
+          "label" : "Minimize",
+          "type" : "url",
+          "value" : "rectangle://execute-action?name=minimize"
+        },
+        {
+          "key" : "c",
+          "label" : "Center",
+          "type" : "url",
+          "value" : "rectangle://execute-action?name=center"
+        }
+      ],
+      "key" : "w",
+      "label" : "Window",
+      "type" : "group"
+    }
+  ],
+  "type" : "group"
+}

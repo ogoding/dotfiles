@@ -42,6 +42,9 @@ window-colorspace = display-p3
 # TODO: Decide if this should be a global keybind or not. Aka it'll be usable even when ghostty isn't in the foreground
 # TODO: Adjust the keybind itself to make it usable with mac keyboard
 keybind = all:opt+ctrl+command+shift+t=toggle_quick_terminal
+# This comes from ClaudeCode and it's /terminal-setup command
+keybind = shift+enter=text:\x1b\r
+
 quick-terminal-animation-duration = 0.05
 quick-terminal-size = 40%
 quick-terminal-position = center

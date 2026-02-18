@@ -10,16 +10,24 @@ export-env { $env.STARSHIP_SHELL = "nu"; load-env {
 
     # Does not play well with default character module.
     # TODO: Also Use starship vi mode indicators?
-    # TODO: Try and show the number of nushell jobs somehow?
     PROMPT_INDICATOR: ""
 
     PROMPT_COMMAND: {||
-        # jobs are not supported
         (
+            # The initial value of `$env.CMD_DURATION_MS` is always `0823`, which is an official setting.
+            # See https://github.com/nushell/nushell/discussions/6402#discussioncomment-3466687.
+            let cmd_duration = if $env.CMD_DURATION_MS == "0823" { 0 } else { $env.CMD_DURATION_MS };
             ^/opt/homebrew/bin/starship prompt
-                --cmd-duration $env.CMD_DURATION_MS
+                --cmd-duration $cmd_duration
                 $"--status=($env.LAST_EXIT_CODE)"
                 --terminal-width (term size).columns
+                ...(
+                    if (which "job list" | where type == built-in | is-not-empty) {
+                        ["--jobs", (job list | length)]
+                    } else {
+                        []
+                    }
+                )
         )
     }
 
@@ -29,11 +37,21 @@ export-env { $env.STARSHIP_SHELL = "nu"; load-env {
 
     PROMPT_COMMAND_RIGHT: {||
         (
+            # The initial value of `$env.CMD_DURATION_MS` is always `0823`, which is an official setting.
+            # See https://github.com/nushell/nushell/discussions/6402#discussioncomment-3466687.
+            let cmd_duration = if $env.CMD_DURATION_MS == "0823" { 0 } else { $env.CMD_DURATION_MS };
             ^/opt/homebrew/bin/starship prompt
                 --right
-                --cmd-duration $env.CMD_DURATION_MS
+                --cmd-duration $cmd_duration
                 $"--status=($env.LAST_EXIT_CODE)"
                 --terminal-width (term size).columns
+                ...(
+                    if (which "job list" | where type == built-in | is-not-empty) {
+                        ["--jobs", (job list | length)]
+                    } else {
+                        []
+                    }
+                )
         )
     }
 }}

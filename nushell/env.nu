@@ -11,6 +11,9 @@ load-env {
   INFOPATH: "/opt/homebrew/share/info:",
 
   GPG_TTY:(tty)
+
+  # Disable claude code's autoupdater in favour of using homebrew instead
+  DISABLE_AUTOUPDATER:1
 };
 
 use std/util "path add"
