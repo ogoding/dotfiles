@@ -26,37 +26,22 @@ alias dp = dirs prev
 alias dl = dirs
 alias dgo = dirs goto
 
-alias nu-watch = watch
-def watch [
-  args: closure
+alias watchexec = watchexec --clear reset
+# # TODO: Add a debug events flag that logs out filesystem events
+def run-on-change [
+  args: closure,
 ] {
-  clear
-  nu-watch . {|op, path|
-    let bck_file = $path | str ends-with ".bck";
-
-    const IGNORED_PATHS = ["target", "cache", "out", "build", ".git", ".jj", ".pytest_cache", ".venv"];
-    let ignored = $IGNORED_PATHS | any {|dir| $path | str contains $dir };
-
-    if (($op == "Write") and not $bck_file and not $ignored) {
-      clear
+  const IGNORED_PATHS = ["target", "cache", "out", "build", ".git", ".jj", ".pytest_cache", ".venv"];
+  clear;
+  watch --debounce 30ms .
+    | where operation == "Write"
+    | where path !~ "*.bck" # path not-like *.bck
+    | where ($IGNORED_PATHS | any {|dir| $in.path | str contains $dir })
+    | each {
+      clear;
       try { do $args }
     }
-  }
 }
-# # TODO: Add a debug events flag that logs out filesystem events
-# def watcher [
-#   args: closure
-# ] {
-#   const IGNORED_PATHS = ["target", "cache", "out", "build", ".pytest_cache", ".venv"];
-#   watch --debounce 50ms .
-#     | where operation == "Write"
-#     | where path !~ "*.bck" # path not-like *.bck
-#     | where ($IGNORED_PATHS | any {|dir| $in.path | str contains $dir })
-#     | each {
-#       clear;
-#       try { do $args }
-#     }
-# }
 
 def resume [
   # TODO: Try to make this support more than a single string

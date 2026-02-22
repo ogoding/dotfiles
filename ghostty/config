@@ -31,7 +31,6 @@ window-colorspace = display-p3
 # keybind = cmd+delete=text:\x0b
 # keybind = cmd+backspace=text:\x15
 # keybind = opt+delete=esc:d
-# TODO: keybind toggle_quick_terminal to something - https://github.com/ghostty-org/ghostty/blob/main/src/config/Config.zig
 #
 # # Add to .zshrc
 # bindkey "\e[1;3D" backward-word     # ⌥←

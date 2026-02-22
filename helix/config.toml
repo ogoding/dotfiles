@@ -7,18 +7,17 @@ cursorline = true
 cursorcolumn = true
 bufferline = "multiple"
 color-modes = true
-# TODO: Try even lower
-idle-timeout = 200
+# rainbow-brackets = true
 
 insert-final-newline = true
 trim-final-newlines = false
 trim-trailing-whitespace = false
+end-of-line-diagnostics = "hint"
 
+idle-timeout = 200
 auto-save.focus-lost = true
 auto-save.after-delay.enable = true
 auto-save.after-delay.timeout = 600
-
-end-of-line-diagnostics = "hint"
 
 [editor.soft-wrap]
 enable = true

@@ -8,7 +8,6 @@ $env.config = $env.config | default {} | merge {
   bracketed_paste: true,
   # edit_mode: "vi",
 
-  # TODO: Completions config
   history: {
     file_format: "sqlite",
     max_size: 5_000_000,
@@ -17,13 +16,11 @@ $env.config = $env.config | default {} | merge {
   }
 };
 
+alias pl = polars
 if (not (plugin list | any {|p| $p.name == "polars" })) {
   print "Enabling the polars plugin installed by homebrew"
   plugin add /opt/homebrew/bin/nu_plugin_polars
-  # TODO: Disable the plugin_gc for polars?
 }
 
 # Command Completion configuration
 source completion.nu
-
-# TODO: Replace the autoload/ignored.nu file with a directory, or something nicer to work with

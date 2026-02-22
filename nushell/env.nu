@@ -23,6 +23,8 @@ load-env {
   DISABLE_AUTOUPDATER:1
 };
 
+# $env.config.table.mode = "frameless"
+
 use std/util "path add"
 path add "/opt/homebrew/bin"
 path add "~/.local/bin"

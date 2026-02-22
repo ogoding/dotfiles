@@ -21,8 +21,6 @@ alias gpl = git pull
 alias glog = git dlog
 alias gloggraph = git log --graph --oneline
 
-# TODO: Convert these to multi-command aliases when it's supported
-# https://github.com/nushell/nushell/issues/740#issuecomment-1950144291
 def gac [] {
   gaddmod;
   gc

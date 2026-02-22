@@ -3,7 +3,7 @@
     {
       "key" : "t",
       "type" : "application",
-      "value" : "/Users/olivergoding/Applications/Ghostty.app"
+      "value" : "/Applications/Ghostty.app"
     },
     {
       "actions" : [
@@ -15,7 +15,7 @@
         {
           "key" : "m",
           "type" : "application",
-          "value" : "/Users/olivergoding/Applications/Spotify.app"
+          "value" : "/Applications/Spotify.app"
         },
         {
           "key" : "s",
@@ -25,22 +25,27 @@
         {
           "key" : "o",
           "type" : "application",
-          "value" : "/Users/olivergoding/Applications/Obsidian.app"
+          "value" : "/Applications/Obsidian.app"
         },
         {
           "key" : "t",
           "type" : "application",
-          "value" : "/Users/olivergoding/Applications/Ghostty.app"
+          "value" : "/Applications/Ghostty.app"
         },
         {
           "key" : "z",
           "type" : "application",
-          "value" : "/Users/olivergoding/Applications/Zed.app"
+          "value" : "/Applications/Zed.app"
         },
         {
           "key" : "a",
           "type" : "application",
           "value" : "/System/Applications/Utilities/Activity Monitor.app"
+        },
+        {
+          "key" : "d",
+          "type" : "application",
+          "value" : "/Applications/Todoist.app"
         }
       ],
       "key" : "a",
@@ -50,7 +55,7 @@
     {
       "actions" : [
         {
-          "key" : "1",
+          "key" : "q",
           "label" : "Maximize",
           "type" : "url",
           "value" : "rectangle-pro://execute-action?name=maximize"
@@ -68,9 +73,21 @@
               "label" : "Right half",
               "type" : "url",
               "value" : "rectangle-pro://execute-action?name=right-half"
+            },
+            {
+              "key" : "h",
+              "label" : "Left half",
+              "type" : "url",
+              "value" : "rectangle-pro://execute-action?name=left-half"
+            },
+            {
+              "key" : "l",
+              "label" : "Right half",
+              "type" : "url",
+              "value" : "rectangle-pro://execute-action?name=right-half"
             }
           ],
-          "key" : "2",
+          "key" : "w",
           "label" : "Resize: Two columns",
           "type" : "group"
         },
@@ -95,32 +112,50 @@
               "value" : "rectangle-pro://execute-action?name=last-third"
             },
             {
-              "key" : "9",
+              "key" : "q",
+              "label" : "First third",
+              "type" : "url",
+              "value" : "rectangle-pro://execute-action?name=first-third"
+            },
+            {
+              "key" : "w",
+              "label" : "Center third",
+              "type" : "url",
+              "value" : "rectangle-pro://execute-action?name=center-third"
+            },
+            {
+              "key" : "e",
+              "label" : "Last third",
+              "type" : "url",
+              "value" : "rectangle-pro://execute-action?name=last-third"
+            },
+            {
+              "key" : "h",
               "label" : "First two-thirds",
               "type" : "url",
               "value" : "rectangle-pro://execute-action?name=first-two-thirds"
             },
             {
-              "key" : "0",
+              "key" : "l",
               "label" : "Last two-thirds",
               "type" : "url",
               "value" : "rectangle-pro://execute-action?name=last-two-thirds"
             }
           ],
-          "key" : "3",
+          "key" : "e",
           "label" : "Resize: Three columns",
           "type" : "group"
         },
         {
           "actions" : [
             {
-              "key" : "p",
+              "key" : "h",
               "label" : "Previous Display",
               "type" : "url",
               "value" : "rectangle-pro://execute-action?name=previous-display"
             },
             {
-              "key" : "n",
+              "key" : "l",
               "label" : "Next Display",
               "type" : "url",
               "value" : "rectangle-pro://execute-action?name=next-display"
@@ -131,13 +166,13 @@
           "type" : "group"
         },
         {
-          "key" : "w",
-          "label" : "Close",
+          "key" : "o",
+          "label" : "Quit App",
           "type" : "url",
           "value" : "rectangle-pro://execute-action?name=close"
         },
         {
-          "key" : "q",
+          "key" : "p",
           "label" : "Quit App",
           "type" : "url",
           "value" : "rectangle-pro://execute-action?name=quit-app"
