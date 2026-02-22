@@ -1,52 +1,51 @@
-# TODO: Move all this into a module and autoload it if `.git` exists?
-
-alias gitui = lazygit
-alias gui = lazygit
-
-alias gadd = git add
-alias gaddmod = gadd -u
-alias gaddm = gaddmod
-
-alias gc = git commit
-alias gcm = gc -m
-alias gca = gc --amend
-
-alias gst = git status
-alias gfa = git fetch --all --prune
-alias ggp = git push origin
-alias ggf = git push origin --force
-alias gpu = ggp
-alias gpl = git pull
-
-alias glog = git dlog
-alias gloggraph = git log --graph --oneline
-
 def gac [] {
-  gaddmod;
-  gc
+  git add --update;
+  git commit;
 }
 
 def gacm [message: string] {
-  gaddmod;
-  gcm $message
+  git add -u;
+  git commit --message $message
 }
-
-alias gdiff = git diff
-alias gdiffstg = git diff --staged
-alias gdif = gdiff
-alias gdifs = gdiffstg
-alias gdiffs = gdiffstg
-
-alias gsw = git switch
-alias gswnew = git switch -c
-alias gundo = git restore
-alias gundos = git restore --staged
 
 # TODO: Add stash aliases, e.g. specific file, diff with current, etc
 # TODO: Add method of adding/stashing hunks/chunks
 
-alias gmodule-update = git submodule update --remote --merge
-alias gmup = gmodule-update
+$env.config.abbreviations = $env.config.abbreviations | default {} | merge {
+  gitui: 'lazygit',
+  gui: 'lazygit',
+
+  gadd: 'git add',
+  gaddm: 'gadd -u',
+  gaddmod: 'gadd -u',
+
+  gc: 'git commit',
+  gcm: 'gc -m',
+  gca: 'gc --amend',
+
+  gst: 'git status',
+  gfa: 'git fetch --all --prune',
+  ggp: 'git push origin',
+  ggf: 'git push origin --force',
+  gpl: 'git pull',
+
+  glog: 'git dlog',
+  gloggraph: 'git log --graph --oneline',
+
+  gdiff: 'git diff',
+  gdiffstg: 'git diff --staged',
+  gdif: 'git diff',
+  gdifs: 'git diff --staged',
+  gdiffs: 'git diff --staged',
+
+  gsw: 'git switch',
+  gswnew: 'git switch -c',
+  gundo: 'git restore',
+  gundos: 'git restore --staged',
+
+  gmodul:u'pdate = git submodule update --remote --merge',
+  gmup: 'git submodule update --remote --merge',
+};
 
 # TODO: Setup some aliases using fzf or skim
 # https://www.grailbox.com/2023/04/nushell-fzf-functions-for-git-switch-and-git-branch-d/

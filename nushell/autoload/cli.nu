@@ -18,6 +18,7 @@ alias cdconfig = cd ~/.config
 alias hxconfig = hx ~/.config
 alias hx-clear-log = rm ~/.cache/helix/helix.log
 
+# TODO: Make a fuzzy pushd/popd using zoxide + dirs
 use std/dirs;
 alias pushd = dirs add
 alias popd = dirs drop
@@ -37,6 +38,10 @@ def run-on-change [
     | where operation == "Write"
     | where path !~ "*.bck" # path not-like *.bck
     | where ($IGNORED_PATHS | any {|dir| $in.path | str contains $dir })
+    # This any operator converts the loop into a single execution of the callback. Without this,
+    # we result in repeatedly running the callback if a bundle of file writes happen at the same time.
+    # If we ever need to access the modified files then we can adjust this and optionally remove the `any {}`
+    | any {}
     | each {
       clear;
       try { do $args }

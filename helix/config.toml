@@ -1,4 +1,8 @@
 theme = "catppuccin_mocha"
+  # theme = "moonfly"
+  # theme = "neobones_dark"
+  # theme = "kurokula"
+# theme = "everblush"
 
 [editor]
 true-color = true

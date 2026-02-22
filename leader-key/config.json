@@ -46,6 +46,11 @@
           "key" : "d",
           "type" : "application",
           "value" : "/Applications/Todoist.app"
+        },
+        {
+          "key" : "h",
+          "type" : "application",
+          "value" : "/Users/ogoding/Applications/Chrome Apps.localized/Google Chat.app"
         }
       ],
       "key" : "a",

@@ -11,43 +11,64 @@ indent = { tab-width = 2, unit = "  " }
 roots = []
 grammar = "xml"
 
+ 
+[language-server.biome]
+command = "biome"
+args = ["lsp-proxy"]
+
+[language-server]
+oxlint-language-server = {command = "npx", args = ["oxlint", "--lsp"]}
 
 [[language]]
 name = "html"
+# formatter = { command = 'prettier', args = ["--parser", "html"] }
+formatter = { command = "npx", args = ["oxfmt", "format", "--stdin-filepath", "a.html"] }
 
 # See the following link for how to install the json/css/etc LSPs
 # https://github.com/helix-editor/helix/wiki/Language-Server-Configurations#json
 [[language]]
 name = "json"
-formatter = { command = "prettier", args = [ "--parser", "json" ] }
+# language-servers = [ { name = "vscode-json-language-server", except-features = [ "format" ] }, "biome" ]
+# formatter = { command = "prettier", args = [ "--parser", "json" ] }
+language-servers = [ { name = "vscode-json-language-server", except-features = [ "format" ] }, "oxlint-language-server" ]
+formatter = { command = "npx", args = ["oxfmt", "format", "--stdin-filepath", "a.json"] }
 
 [[language]]
 name = "css"
-formatter = { command = "prettier", args = [ "--parser", "css" ] }
+# formatter = { command = 'prettier', args = ["--parser", "css"] }
+formatter = { command = "npx", args = ["oxfmt", "format", "--stdin-filepath", "a.css"] }
 
 [[language]]
 name = "javascript"
+language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "oxlint-language-server" ]
+formatter = { command = "npx", args = ["oxfmt", "format", "--stdin-filepath", "a.js"] }
 auto-format = true
-formatter = { command = "prettier", args = [ "--parser", "typescript" ] }
-language-servers = ["tsgo", "typescript-language-server"]
+# formatter = { command = "prettier", args = [ "--parser", "typescript" ] }
+# language-servers = ["tsgo", "typescript-language-server"]
 
 [[language]]
 name = "typescript"
+language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "oxlint-language-server" ]
+formatter = { command = "npx", args = ["oxfmt", "format", "--stdin-filepath", "a.ts"] }
 auto-format = true
-formatter = { command = "prettier", args = [ "--parser", "typescript" ] }
-language-servers = ["tsgo", "typescript-language-server"]
+# formatter = { command = "prettier", args = [ "--parser", "typescript" ] }
+# language-servers = ["tsgo", "typescript-language-server"]
 
 [[language]]
 name = "tsx"
+language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "oxlint-language-server" ]
+formatter = { command = "npx", args = ["oxfmt", "format", "--stdin-filepath", "a.tsx"] }
 auto-format = true
-formatter = { command = "prettier", args = [ "--parser", "typescript" ] }
-language-servers = ["tsgo", "typescript-language-server"]
+# formatter = { command = "prettier", args = [ "--parser", "typescript" ] }
+# language-servers = ["tsgo", "typescript-language-server"]
 
 [[language]]
 name = "jsx"
+language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "oxlint-language-server" ]
+formatter = { command = "npx", args = ["oxfmt", "format", "--stdin-filepath", "a.jsx"] }
 auto-format = true
-formatter = { command = "prettier", args = [ "--parser", "typescript" ] }
-language-servers = ["tsgo", "typescript-language-server"]
+# formatter = { command = "prettier", args = [ "--parser", "typescript" ] }
+# language-servers = ["tsgo", "typescript-language-server"]
 
 [language-server.tsgo]
 name = "tsgo"

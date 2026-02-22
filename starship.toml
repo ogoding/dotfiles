@@ -307,25 +307,26 @@ format = '\[[$symbol($version)]($style)\]'
 
 
 
-# [profiles]
-# claude-code = "$claude_model$claude_context$claude_cost"
+[profiles]
+claude-code = "$claude_model$claude_context$claude_cost"
 
-# [claude_model]
-# format = "on [$symbol$model]($style) "
-# symbol = "🤖 "
-# style = "bold blue"
+[claude_model]
+format = "[$model]($style) "
+symbol = "🤖 "
+style = "bold blue"
 
-# [claude_context]
+[claude_context]
 # use curr_input_tokens/curr_output_tokens for token usage in the most recent API call
-# format = "[$guage $percentage | ($input_tokens total in | $output_tokens total out)]($style) "
-# gauge_width = 10
+format = " | [ctx used $percentage | (total used $input_tokens in / $output_tokens out) | (cache $curr_cache_creation_tokens added / $curr_cache_read_tokens read)]($style)"
 
-# [claude_cost]
-# Variable | description
-# cost | Total session cost in USD (formatted to 2 decimals)
-# duration | Total session duration
-# api_duration | Total API call duration
-# lines_added | Total lines of code added
-# lines_removed | Total lines of code removed
-# format = "[$symbol$cost]($style) "
-# symbol = "💰 "
+[[claude_context.display]]
+threshold = 0.1
+hidden = false
+
+[claude_cost]
+format = " | [$symbol \\$$cost | lines affected +$lines_added -$lines_removed | session $duration | api duration $api_duration]($style) "
+symbol = "💰"
+
+[[claude_cost.display]]
+threshold = 0.1
+hidden = false
