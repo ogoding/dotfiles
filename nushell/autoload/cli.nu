@@ -6,6 +6,8 @@ alias l = ls
 alias ll = ls -l
 alias la = ls -la
 
+alias splitrow = split row "\n"
+
 alias brewup = brew update
 def bup [] {
   brew update;
@@ -32,7 +34,7 @@ def watch [
   nu-watch . {|op, path|
     let bck_file = $path | str ends-with ".bck";
 
-    const IGNORED_PATHS = ["target", "cache", "out", "build", ".git", ".jj"];
+    const IGNORED_PATHS = ["target", "cache", "out", "build", ".git", ".jj", ".pytest_cache", ".venv"];
     let ignored = $IGNORED_PATHS | any {|dir| $path | str contains $dir };
 
     if (($op == "Write") and not $bck_file and not $ignored) {
@@ -41,6 +43,20 @@ def watch [
     }
   }
 }
+# # TODO: Add a debug events flag that logs out filesystem events
+# def watcher [
+#   args: closure
+# ] {
+#   const IGNORED_PATHS = ["target", "cache", "out", "build", ".pytest_cache", ".venv"];
+#   watch --debounce 50ms .
+#     | where operation == "Write"
+#     | where path !~ "*.bck" # path not-like *.bck
+#     | where ($IGNORED_PATHS | any {|dir| $in.path | str contains $dir })
+#     | each {
+#       clear;
+#       try { do $args }
+#     }
+# }
 
 def resume [
   # TODO: Try to make this support more than a single string
@@ -48,9 +64,11 @@ def resume [
   --interactive (-i) = false
 ] {
   # TODO: If proc_name is number-like, treat it as a job id
+  let frozen_jobs = job list | where {|j| $j.type == "frozen" }
   if ($proc_name == null) {
-    if (job list | is-not-empty) {
-      job unfreeze
+    if ($frozen_jobs | is-not-empty) {
+      let job = $frozen_jobs | last
+      job unfreeze $job.id
     } else {
       print "No frozen jobs found. Try `job list` for the full list."
     }
@@ -58,7 +76,7 @@ def resume [
     # With no args, just do "jobs unfreeze"
     # With args, pass to fzf/skim and fuzzy search for the process name
 
-    let jobs = job list | where {|j| $j.type == "frozen" }
+    let jobs = $frozen_jobs
       | where {|j|
         ps
         | where pid in $j.pids
@@ -67,6 +85,7 @@ def resume [
         | is-not-empty
       };
 
+    # TODO: Combine the unfreezing from both branches
     if ($jobs | is-not-empty) {
       $jobs | last | job unfreeze
     } else {
@@ -75,13 +94,14 @@ def resume [
   }
 }
 alias fg = resume
+alias jl = job list
 
 # TODO: Support other args
 def hxrg [...args: string] {
   # The reason we have to split the row is because nushell
   # doesn't have the same auto splitting string behaviour
   # of bash/zsh
-  let files = rg --no-heading --line-number ...$args | split row "\n";
+  let files = rg --no-heading --line-number --max-count 1 ...$args | split row "\n";
   let files_to_open = $files
     | each {|s| $s | parse '{file}:{line}:{rest}'}
     | flatten
@@ -91,8 +111,9 @@ def hxrg [...args: string] {
 }
 
 def hxfd [...args: string] {
-  let files = fd ...$args | split row "\n";
-  hx ...$files
+  # let files = fd ...$args | split row "\n";
+  # hx ...$files
+  fd -X hx ...$args
 }
 
 def find-and-replace [old: string, new: string] {

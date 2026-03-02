@@ -24,6 +24,8 @@ def jmv [bookmark: string, revset: string = "@-"] {
 
 def jj_rebase_to_latest [] {
   jj git fetch;
+  # Alternatives such as "--insert-after" results in the commits being rebased
+  # being inserted *between* the latest "trunk()" commit and any children
   jj rebase --onto "trunk()"
 }
 
@@ -49,64 +51,76 @@ alias jn = jjnew
 
 ## Workspace aliases
 
-# TODO: Bookmark picker alias/function for pushing?
-alias jjws = jj_workspace_path
 
-def jj_workspace_path [name: string] {
-  # TODO: fuzzy search through workspace list to find the correct name
-  # auto accept if only one is available
-  # TODO: Open interactive menu if nothing is provided or --interactive is passed in
-  jj workspace root --ignore-working-copy --name $name
+def jj_list_workspaces [] {
+  jj workspace list --ignore-working-copy --template 'concat(name, "\n")' | split row "\n"
 }
+
+def --env jj_cd_workspace [name?: string@jj_list_workspaces] {
+  if $name == null {
+    jj_list_workspaces 
+  } else {
+    # TODO: Use `split row "\n" | input list` to avoid needing to type the whole thing. Can apply it to the $name==null branch too
+    cd (jj workspace root --ignore-working-copy --name $name)
+  }
+}
+
+alias jjcdhome = cd (jj workspace root --ignore-working-copy)
+alias jjhome = jjcdhome
+alias jjws = jj_cd_workspace
+alias jws = jjws
+alias ws = jjws
 
 # TODO: Instead of having to create a closure, make it a string and call `nu -c $command`?
 # see https://github.com/nushell/nushell/discussions/7794
-def jj_spawn_workspace [name: string, command?: closure] {
+def --env jj_spawn_workspace [name: string, command?: closure] {
   let WORKSPACE_DIR = $"($env.HOME)/jj-workspaces"
   if not ($WORKSPACE_DIR | path exists) {
     mkdir $WORKSPACE_DIR
   }
   
-  let directory = jj workspace root --ignore-working-copy --name $name | complete
+  let directory = (jj workspace root --ignore-working-copy --name $name | complete)
   if $directory.exit_code == 0 {
     print $"($name) already exists! Skipping creation..."
   } else {
-    # FIXME: use the repo name in the path (or the directory name)
-    jj workspace add --name $name --revision "trunk()" $"($WORKSPACE_DIR)/($name)"
+    let repo_name = jj git remote list | lines | first | split row "\t" | last | path parse | get stem
+    # FIXME: Add some sanitization to $name (e.g. replace `/` with `-`)
+    jj workspace add --name $name --revision "trunk()" $"($WORKSPACE_DIR)/($repo_name)-($name)"
   }
 
-  cd (jj_workspace_path $name)
+  jj_cd_workspace $name
+  # IDEA: Automatically create a new bookmark?
 
+  # TODO: If no command is specified, spawn a new shell in directory?
   if $command != null {
-    # TODO: Spawn a new nushell instance, then run the command?
-    # Maybe this will persist working dir of the other workspace
     do $command
   }
 }
 
-# TODO: Add a --interactive flag to fuzzy search through the workspace list
-def jj_drop_workspace [name: string] {
-  # TODO: Prevent dropping the current workspace?
+def jj_drop_workspace [name: string@jj_list_workspaces] {
   if $name == "default" {
     print "ERR: Cannot drop the 'default' workspace"
     return
   }
 
-  let directory = jj workspace root --ignore-working-copy --name $name 
+  let directory = (jj workspace root --ignore-working-copy --name $name)
+
+  # FIXME: Prevent dropping the current workspace
 
   if $env.LAST_EXIT_CODE != 0 {
     let WORKSPACE_DIR = $"($env.HOME)/jj-workspaces"
     print $"The workspace ($name) does not exist. If this is not expected, or something failed previously,"
-    print $"check the $($WORKSPACE_DIR) directory for the files."
+    print $"check the ($WORKSPACE_DIR) directory for the files."
     return
   } else {
+    print $"Forgetting ($name)..."
     jj workspace forget $name --ignore-working-copy
 
-    # TODO: Check if we are currently in the directory, if so, switch to the `default` workspace
-    # _then_ delete $directory
-
+    print $"Deleting ($directory)..."
     # TODO: Check if directory exists?
     rm -r $directory
+
+    print $"($name) has been removed."
   }
 }
 

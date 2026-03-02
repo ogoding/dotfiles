@@ -13,12 +13,15 @@ module py {
   export def lint [] {
     uv tool run ruff check
   }
+  
   export def format [] {
     uv tool run ruff format
   }
+  
   export def type-check [] {
     uv tool run ty check
   }
+  
   export def check [] {
     if not (["ruff", "ty"] | all {|tool| (uv tool list) | str contains $tool }) {
       print "Installing ruff (formatter/linter) and ty (type checker)"
@@ -34,6 +37,7 @@ module py {
     uv tool install ruff;
     uv tool install ty;
   }
+
   export alias uv-update = uv tool upgrade --all
 
   export alias venv = uv venv

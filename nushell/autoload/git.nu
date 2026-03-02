@@ -1,5 +1,4 @@
 # TODO: Move all this into a module and autoload it if `.git` exists?
-# TODO: Setup some better git completions
 
 alias gitui = lazygit
 alias gui = lazygit
@@ -40,8 +39,7 @@ alias gdif = gdiff
 alias gdifs = gdiffstg
 alias gdiffs = gdiffstg
 
-# TODO: Convert this to a function and use fzf/skim when no arg is supplied (or default branch)
-alias gsw = git switch # TODO: Also fetch/pull?
+alias gsw = git switch
 alias gswnew = git switch -c
 alias gundo = git restore
 alias gundos = git restore --staged
