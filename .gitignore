@@ -8,8 +8,12 @@ helix/themes
 
 jj/repos
 
+nushell/history.txt
 nushell/history.sqlite3*
 nushell/plugin.msgpackz
+# This is a hidden file containing client/device specific aliases/etc
+# The alternative to this is a private repo but that still requires
+# things leaving the machine
 nushell/autoload/ignored.nu
 
 raycast/extensions

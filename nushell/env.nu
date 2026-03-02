@@ -12,6 +12,9 @@ load-env {
   # XDG_CONFIG_HOME: "~/.config",
 
   GPG_TTY:(tty)
+
+  # Disable claude code's autoupdater in favour of using homebrew instead
+  DISABLE_AUTOUPDATER:1
 };
 
 use std/util "path add"

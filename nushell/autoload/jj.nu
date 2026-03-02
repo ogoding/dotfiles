@@ -9,10 +9,11 @@ alias jst = jj status
 alias js = jst
 alias jjla = jj log
 alias jla = jjla
+alias jls = jj log --limit 20 --ignore-working-copy -r "ancestors(reachable(@, mutable()), 2)"
 alias jjl = jj log --limit 20 --ignore-working-copy
 alias jl = jjl
-alias jls = jj log --limit 20 --ignore-working-copy -r "ancestors(reachable(@, mutable()), 2)"
-alias jc = jj commit
+alias jjc = jj commit
+alias jc = jjc
 
 alias jjf = jj git fetch
 alias jf = jjf
@@ -23,7 +24,7 @@ def jmv [bookmark: string, revset: string = "@-"] {
 
 def jj_rebase_to_latest [] {
   jj git fetch;
-  jj rebase -A "trunk()"
+  jj rebase --onto "trunk()"
 }
 
 def jjp [] {
@@ -110,3 +111,14 @@ def jj_drop_workspace [name: string] {
 }
 
 # FIXME: Add a jj_switch_workspace with a name and/or fuzzy search menu
+
+# def jj-squash-range [oldest_commit: string, latest_commit: string, target_commit: string] {
+#   jj squash --from $"($oldest_commit)..($latest_commit)" --into $target_commit
+# }
+
+# TODO: Create an alias for absorb (or some docs)
+# With default args, absorb effectively redistributes/reallocates changes from the current commit
+# to the most recent mutable ancestor/parent commit when the file was modified
+# This might end up updating a number of commits
+# https://www.pauladamsmith.com/blog/2025/08/jj-absorb.html
+# alias jj-redistribute-changes = jj absorb --from @ --to "mutable()"
