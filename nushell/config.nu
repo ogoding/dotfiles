@@ -25,3 +25,5 @@ if (not (plugin list | any {|p| $p.name == "polars" })) {
 
 # Command Completion configuration
 source completion.nu
+
+# TODO: Replace the autoload/ignored.nu file with a directory, or something nicer to work with

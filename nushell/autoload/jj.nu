@@ -50,7 +50,23 @@ alias jn = jjnew
 
 
 ## Workspace aliases
+def jj_list_bookmarks [] {
+  jj bookmark list -r "mine()" --ignore-working-copy 
+    | lines
+    | where $it !~ "@"
+    | each {|s| $s | parse '{bookmark}:{rest}' }
+    | get bookmark
+    | flatten
+}
 
+alias jj_switch_bookmarks = jj new (jj_list_bookmarks | input list --fuzzy "Pick a bookmark")
+def jj_mega_merge_bookmarks [] {
+  let bookmarks = jj_list_bookmarks | input list --fuzzy --multi "Pick bookmarks to merge";
+  if ($bookmarks | is-not-empty) {
+    let merge_string = $bookmarks | each {$"-b ($in)"} | str join " ";
+    jj new -r @- ($merge_string)
+  }
+}
 
 def jj_list_workspaces [] {
   jj workspace list --ignore-working-copy --template 'concat(name, "\n")' | split row "\n"
@@ -58,13 +74,17 @@ def jj_list_workspaces [] {
 
 def --env jj_cd_workspace [name?: string@jj_list_workspaces] {
   if $name == null {
-    jj_list_workspaces 
+    let workspace = jj_list_workspaces | split row "\n" | input list --fuzzy "Pick a workspace to go to:"
+    if $workspace != null {
+      print $"Jumping to ($workspace)"
+      cd (jj workspace root --ignore-working-copy --name $workspace)
+    }
   } else {
-    # TODO: Use `split row "\n" | input list` to avoid needing to type the whole thing. Can apply it to the $name==null branch too
     cd (jj workspace root --ignore-working-copy --name $name)
   }
 }
 
+# TODO: Create an alias/function to print the current workspace name
 alias jjcdhome = cd (jj workspace root --ignore-working-copy)
 alias jjhome = jjcdhome
 alias jjws = jj_cd_workspace
@@ -84,8 +104,14 @@ def --env jj_spawn_workspace [name: string, command?: closure] {
     print $"($name) already exists! Skipping creation..."
   } else {
     let repo_name = jj git remote list | lines | first | split row "\t" | last | path parse | get stem
+    let directory = $"($WORKSPACE_DIR)/($repo_name)"
+
+    if not ($directory | path exists) {
+      mkdir $directory
+    }
+
     # FIXME: Add some sanitization to $name (e.g. replace `/` with `-`)
-    jj workspace add --name $name --revision "trunk()" $"($WORKSPACE_DIR)/($repo_name)-($name)"
+    jj workspace add --name $name --revision "trunk()" $"($directory)/($name)"
   }
 
   jj_cd_workspace $name
@@ -123,8 +149,6 @@ def jj_drop_workspace [name: string@jj_list_workspaces] {
     print $"($name) has been removed."
   }
 }
-
-# FIXME: Add a jj_switch_workspace with a name and/or fuzzy search menu
 
 # def jj-squash-range [oldest_commit: string, latest_commit: string, target_commit: string] {
 #   jj squash --from $"($oldest_commit)..($latest_commit)" --into $target_commit

@@ -126,13 +126,6 @@ def top-commands [] {
   history | each {|h| $h.command | split words | first 1 } | flatten | histogram | first 10
 }
 
-# TODO: Write something that changes the current dir to either $HOME or the closest .git (whichever is first)
-# - make the function to determine the closest .git, .jj or $HOME into a standalone function so that we can use it with zi or fzf to quickly jump around a repo
-#   - if we use zi for jumping out, we could just auto insert the project/home dir path into the query prompt
-# def cdroot [] {
-
-# }
-
 # TODO: Write something that uses a backing file (e.g. in ~/.cache or ~/.local) to store common directories
 # Potentially has a bit of overlap with zoxide and maybe it'd be better implemented by figuring out the zoxide completions but the pattern of a backing plaintext file +
 
