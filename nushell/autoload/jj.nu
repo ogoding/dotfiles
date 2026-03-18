@@ -35,7 +35,13 @@ def jjp [] {
 }
 alias jp = jjp
 
-def jjnew [new_bookmark?: string] {
+# TODO: Add another flag to spin out a new workspace?
+def jjnew [new_bookmark?: string, --fetch(-f)] {
+  if $fetch {
+    print "Fetching changes to the git tree"
+    jj git fetch;
+  }
+
   jj new "trunk()";
   if ($new_bookmark != null) {
     jj bookmark create $new_bookmark -r @;
@@ -59,7 +65,9 @@ def jj_list_bookmarks [] {
     | flatten
 }
 
+# TODO: Make this a function and avoid `input list` if there's only one value
 alias jj_switch_bookmarks = jj new (jj_list_bookmarks | input list --fuzzy "Pick a bookmark")
+
 def jj_mega_merge_bookmarks [] {
   let bookmarks = jj_list_bookmarks | input list --fuzzy --multi "Pick bookmarks to merge";
   if ($bookmarks | is-not-empty) {
@@ -74,6 +82,7 @@ def jj_list_workspaces [] {
 
 def --env jj_cd_workspace [name?: string@jj_list_workspaces] {
   if $name == null {
+    # TODO: Avoid `input list` if there's only one value
     let workspace = jj_list_workspaces | split row "\n" | input list --fuzzy "Pick a workspace to go to:"
     if $workspace != null {
       print $"Jumping to ($workspace)"

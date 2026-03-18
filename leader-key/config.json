@@ -117,6 +117,25 @@
           "type" : "group"
         },
         {
+          "actions" : [
+            {
+              "key" : "p",
+              "label" : "Previous Display",
+              "type" : "url",
+              "value" : "rectangle://execute-action?name=previous-display"
+            },
+            {
+              "key" : "n",
+              "label" : "Next Display",
+              "type" : "url",
+              "value" : "rectangle://execute-action?name=next-display"
+            }
+          ],
+          "key": "m",
+          "label" : "Move Monitors",
+          "type" : "group"
+        },
+        {
           "key" : "w",
           "label" : "Close",
           "type" : "url",

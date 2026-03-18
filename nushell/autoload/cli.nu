@@ -61,7 +61,8 @@ def watch [
 def resume [
   # TODO: Try to make this support more than a single string
   proc_name?: string,
-  --interactive (-i) = false
+  # TODO: Implement the interactive bit of this
+  # --interactive (-i)
 ] {
   # TODO: If proc_name is number-like, treat it as a job id
   let frozen_jobs = job list | where {|j| $j.type == "frozen" }
@@ -131,7 +132,7 @@ def top-commands [] {
 
 def backup [
   path: string,
-  --include-date(-d) = false
+  # --include-date(-d)
 ] {
   ## TODO: add a flag to include the date
   cp $path $"($path).bak"
@@ -140,3 +141,5 @@ def backup [
 def bench [script_file] {
   open $script_file | split row "\n" | hyperfine ...$in
 }
+
+# TODO: Write a function to jump around a repo. It could be via `fd | input list --fuzzy` or `zoxide --interactive $workspace_root $location`
