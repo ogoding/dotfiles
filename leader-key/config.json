@@ -3,7 +3,7 @@
     {
       "key" : "t",
       "type" : "application",
-      "value" : "/Applications/Ghostty.app"
+      "value" : "/Users/olivergoding/Applications/Ghostty.app"
     },
     {
       "actions" : [
@@ -15,7 +15,7 @@
         {
           "key" : "m",
           "type" : "application",
-          "value" : "/Applications/Spotify.app"
+          "value" : "/Users/olivergoding/Applications/Spotify.app"
         },
         {
           "key" : "s",
@@ -23,29 +23,24 @@
           "value" : "/Applications/Slack.app"
         },
         {
-          "key" : "f",
+          "key" : "o",
           "type" : "application",
-          "value" : "/Applications/Firefox.app"
+          "value" : "/Users/olivergoding/Applications/Obsidian.app"
         },
         {
           "key" : "t",
           "type" : "application",
-          "value" : "/Applications/Todoist.app"
+          "value" : "/Users/olivergoding/Applications/Ghostty.app"
         },
         {
-          "key" : "o",
+          "key" : "z",
           "type" : "application",
-          "value" : "/Applications/Obsidian.app"
+          "value" : "/Users/olivergoding/Applications/Zed.app"
         },
         {
           "key" : "a",
           "type" : "application",
           "value" : "/System/Applications/Utilities/Activity Monitor.app"
-        },
-        {
-          "key" : "d",
-          "type" : "application",
-          "value" : "/Users/ogoding/Applications/Chrome Apps.localized/Google Chat.app"
         }
       ],
       "key" : "a",
@@ -58,7 +53,7 @@
           "key" : "1",
           "label" : "Maximize",
           "type" : "url",
-          "value" : "rectangle://execute-action?name=maximize"
+          "value" : "rectangle-pro://execute-action?name=maximize"
         },
         {
           "actions" : [
@@ -66,13 +61,13 @@
               "key" : "1",
               "label" : "Left half",
               "type" : "url",
-              "value" : "rectangle://execute-action?name=left-half"
+              "value" : "rectangle-pro://execute-action?name=left-half"
             },
             {
               "key" : "2",
               "label" : "Right half",
               "type" : "url",
-              "value" : "rectangle://execute-action?name=right-half"
+              "value" : "rectangle-pro://execute-action?name=right-half"
             }
           ],
           "key" : "2",
@@ -85,31 +80,31 @@
               "key" : "1",
               "label" : "First third",
               "type" : "url",
-              "value" : "rectangle://execute-action?name=first-third"
+              "value" : "rectangle-pro://execute-action?name=first-third"
             },
             {
               "key" : "2",
               "label" : "Center third",
               "type" : "url",
-              "value" : "rectangle://execute-action?name=center-third"
+              "value" : "rectangle-pro://execute-action?name=center-third"
             },
             {
               "key" : "3",
               "label" : "Last third",
               "type" : "url",
-              "value" : "rectangle://execute-action?name=last-third"
+              "value" : "rectangle-pro://execute-action?name=last-third"
             },
             {
               "key" : "9",
               "label" : "First two-thirds",
               "type" : "url",
-              "value" : "rectangle://execute-action?name=first-two-thirds"
+              "value" : "rectangle-pro://execute-action?name=first-two-thirds"
             },
             {
               "key" : "0",
               "label" : "Last two-thirds",
               "type" : "url",
-              "value" : "rectangle://execute-action?name=last-two-thirds"
+              "value" : "rectangle-pro://execute-action?name=last-two-thirds"
             }
           ],
           "key" : "3",
@@ -122,16 +117,16 @@
               "key" : "p",
               "label" : "Previous Display",
               "type" : "url",
-              "value" : "rectangle://execute-action?name=previous-display"
+              "value" : "rectangle-pro://execute-action?name=previous-display"
             },
             {
               "key" : "n",
               "label" : "Next Display",
               "type" : "url",
-              "value" : "rectangle://execute-action?name=next-display"
+              "value" : "rectangle-pro://execute-action?name=next-display"
             }
           ],
-          "key": "m",
+          "key" : "d",
           "label" : "Move Monitors",
           "type" : "group"
         },
@@ -139,31 +134,31 @@
           "key" : "w",
           "label" : "Close",
           "type" : "url",
-          "value" : "rectangle://execute-action?name=close"
+          "value" : "rectangle-pro://execute-action?name=close"
         },
         {
           "key" : "q",
           "label" : "Quit App",
           "type" : "url",
-          "value" : "rectangle://execute-action?name=quit-app"
+          "value" : "rectangle-pro://execute-action?name=quit-app"
         },
         {
           "key" : "f",
           "label" : "Fullscreen",
           "type" : "url",
-          "value" : "rectangle://execute-action?name=fullscreen"
+          "value" : "rectangle-pro://execute-action?name=fullscreen"
         },
         {
           "key" : "m",
           "label" : "Minimize",
           "type" : "url",
-          "value" : "rectangle://execute-action?name=minimize"
+          "value" : "rectangle-pro://execute-action?name=minimize"
         },
         {
           "key" : "c",
           "label" : "Center",
           "type" : "url",
-          "value" : "rectangle://execute-action?name=center"
+          "value" : "rectangle-pro://execute-action?name=center"
         }
       ],
       "key" : "w",

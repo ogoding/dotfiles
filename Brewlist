@@ -11,12 +11,12 @@ fzf
 git
 helix
 htop
-httpie
-lazygit
+jj
 nushell
 procs
 ripgrep
 sd
+shellcheck
 starship
 tealdeer
 watchexec
@@ -33,5 +33,12 @@ uv
 fnm
 biomejs
 
-taplo
+tombi
 jdtls
+
+colima
+docker
+docker-compose
+
+leader-key
+rectangle-pro
