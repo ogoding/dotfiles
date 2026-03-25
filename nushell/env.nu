@@ -5,11 +5,17 @@ $env.EDITOR = $hx;
 load-env {
   DOCKER_DEFAULT_PLATFORM:"linux/arm64",
   HOMEBREW_NO_ANALYTICS:"1",
+  HOMEBREW_NO_ENV_HINTS:"1",
   HOMEBREW_PREFIX:"/opt/homebrew",
   HOMEBREW_CELLAR:"/opt/homebrew/Cellar",
   HOMEBREW_REPOSITORY:"/opt/homebrew",
+  HOMEBREW_CASK_OPTS:"--appdir=~/Applications",
+
   INFOPATH: "/opt/homebrew/share/info:",
   # XDG_CONFIG_HOME: "~/.config",
+  # XDG_CACHE_HOME: "~/.cache",
+  # XDG_DATA_HOME: "~/.local/share",
+  # XDG_STATE_HOME: "~/.local/state",
 
   GPG_TTY:(tty)
 
