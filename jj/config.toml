@@ -35,6 +35,7 @@ lg = ["log", "-r", "ancestors(reachable(@, mutable()), 2)"]
 'closest_bookmark(to)' = 'heads(::to & bookmarks())'
 
 [templates]
+git_push_bookmark = '"ogoding/push-" ++ change_id.short()'
 draft_commit_description = '''
 concat(
   description,
