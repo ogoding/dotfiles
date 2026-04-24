@@ -4,9 +4,11 @@ module aws {
     aws cloudformation describe-stack-resources --physical-resource-id $id
   }
 
-  # TODO: Setup a sso-login and/or mfa-login? Or just leave it to the client files?
   export def sso-logout [] {
     rm -rf ~/.aws/sso
   }
+
+  export alias aws-mfa = uvx aws-mfa
 }
 
+overlay use aws;

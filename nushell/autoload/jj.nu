@@ -7,10 +7,10 @@ alias jd = jdiff
 alias jsh = jj show
 alias jst = jj status
 alias js = jst
-alias jjla = jj log
+alias jjla = jj log -r "latest(.., 20)"
 alias jla = jjla
-alias jls = jj log --limit 20 --ignore-working-copy -r "ancestors(reachable(@, mutable()), 2)"
-alias jjl = jj log --limit 20 --ignore-working-copy
+alias jls = jj log --limit 20 -r "ancestors(reachable(@, mutable()), 2)"
+alias jjl = jj log --limit 20 
 alias jl = jjl
 alias jjc = jj commit
 alias jc = jjc
@@ -88,8 +88,25 @@ def --env jj_cd_workspace [name?: string@jj_list_workspaces] {
       print $"Jumping to ($workspace)"
       cd (jj workspace root --ignore-working-copy --name $workspace)
     }
+
+    # IDEA: If workspace can't be found, create a new one?
   } else {
-    cd (jj workspace root --ignore-working-copy --name $name)
+    try {
+      # TODO: Suppress output from the following
+      let directory = (jj workspace root --ignore-working-copy --name $name)
+      cd $directory
+    } catch {
+      # JJ doesn't seem to always set a workspace path for the 'default' workspace, so instead we use zoxide
+      # and hope that the default repo directory is in the zoxide history
+      let repo_name = jj git remote list | lines | first | split row "\t" | last | path parse | get stem
+
+      # TODO: If we're already in the directory that zoxide returns, do nothing
+      if $name == "default" {
+        z $repo_name
+      } else {
+        z jj-workspaces $repo_name $name
+      }
+    }
   }
 }
 
@@ -102,7 +119,7 @@ alias ws = jjws
 
 # TODO: Instead of having to create a closure, make it a string and call `nu -c $command`?
 # see https://github.com/nushell/nushell/discussions/7794
-def --env jj_spawn_workspace [name: string, command?: closure] {
+def --env jj_spawn_workspace [name: string, command?: closure, --create-bookmark(-b)=false] {
   let WORKSPACE_DIR = $"($env.HOME)/jj-workspaces"
   if not ($WORKSPACE_DIR | path exists) {
     mkdir $WORKSPACE_DIR
@@ -124,7 +141,11 @@ def --env jj_spawn_workspace [name: string, command?: closure] {
   }
 
   jj_cd_workspace $name
-  # IDEA: Automatically create a new bookmark?
+
+  if $create_bookmark {
+    jj new -r "trunk()"
+    jj bookmark create $name -r @
+  }
 
   # TODO: If no command is specified, spawn a new shell in directory?
   if $command != null {
@@ -158,6 +179,9 @@ def jj_drop_workspace [name: string@jj_list_workspaces] {
     print $"($name) has been removed."
   }
 }
+
+# TODO: Create an alias `jj_close_workspace` that drops the current workspace after a warning
+# The idea would be to chain it - e.g. jj_spawn_workspace feature1 -- claude "Please create the feature, and push the branch to a new branch" && jj_close_workspace
 
 # def jj-squash-range [oldest_commit: string, latest_commit: string, target_commit: string] {
 #   jj squash --from $"($oldest_commit)..($latest_commit)" --into $target_commit
