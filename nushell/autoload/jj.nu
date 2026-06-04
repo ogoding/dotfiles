@@ -216,6 +216,8 @@ $env.config.abbreviations = $env.config.abbreviations | default {} | merge {
   jls: 'jj log --limit 20 -r "ancestors(reachable(@, mutable()), 2)"',
   jl: 'jj log --limit 20',
 
+  jjrbl: 'jj rebase-to-latest',
+  jrbl: 'jj rebase-to-latest',
   jjws: 'jj workspace-jump',
   jjcdhome: 'cd (jj workspace root --ignore-working-copy)',
   jjhome: 'cd (jj workspace root --ignore-working-copy)',
