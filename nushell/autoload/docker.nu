@@ -4,5 +4,6 @@ $env.config.abbreviations = $env.config.abbreviations | default {} | merge {
   ddown: 'docker-compose down'
   dlog: 'docker-compose logs --follow'
   dprune: 'docker system prune --force --all'
+  dvprune: 'docker volume prune --force --all'
   dstop: 'docker stop ...(docker ps --all --quiet | split row "\n")'
 }

@@ -53,7 +53,7 @@ def jj-bookmarks [] {
 }
 
 def "jj bookmark-jump" [name?: string@jj-bookmarks] {
-  mut bookmark: string = $name
+  mut bookmark = $name
 
   if $name == null {
     $bookmark = (jj-bookmarks | input list --fuzzy "Pick a bookmark")
@@ -63,8 +63,6 @@ def "jj bookmark-jump" [name?: string@jj-bookmarks] {
     jj new $bookmark
   }
 }
-# alias "jj bookmark-jump" = jj new (jj-bookmarks | input list --fuzzy "Pick a bookmark")
-alias "jj bookmark-goto" = jj bookmark swap
 
 def "jj bookmark-megamerge" [] {
   let bookmarks = jj-bookmarks | input list --fuzzy --multi "Pick bookmarks to merge";
