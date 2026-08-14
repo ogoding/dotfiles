@@ -191,6 +191,7 @@ alias bm = jj bookmark-jump
 alias "bm jump" = jj bookmark-jump
 alias "bm new" = jj bookmark-new
 
+# Squash a range of commits into some target (from oldest to newest)
 def "jj squash-range" [oldest_commit: string, latest_commit: string, target_commit: string] {
   jj squash --from $"($oldest_commit)..($latest_commit)" --into $target_commit
 }
@@ -212,9 +213,11 @@ $env.config.abbreviations = $env.config.abbreviations | default {} | merge {
   jjp: 'jj push',
   jp: 'jj push',
 
-  jla: 'jj log -r "latest(.., 20)"',
-  jls: 'jj log --limit 20 -r "ancestors(reachable(@, mutable()), 2)"',
+  jll: 'jj log -r "latest(.., 20)"',
+  jls: 'jj log -r "ancestors(reachable(@, mutable()), 2)" --limit 20',
+  jlsa: 'jj log -r "ancestors(reachable(@, mutable()), 2)"',
   jl: 'jj log --limit 20',
+  jla: 'jj log',
 
   jjrbl: 'jj rebase-to-latest',
   jrbl: 'jj rebase-to-latest',

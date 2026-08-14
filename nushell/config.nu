@@ -3,6 +3,9 @@ source themes/catppuccin_mocha.nu
 
 $env.config = $env.config | default {} | merge {
   # edit_mode: "vim",
+  # https://github.com/nushell/reedline/pull/1138
+  # edit_mode: "helix",
+
   show_banner: false,
   use_kitty_protocol: true,
   bracketed_paste: true,
